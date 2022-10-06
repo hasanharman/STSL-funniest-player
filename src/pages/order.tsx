@@ -2,7 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useContext } from "react";
 import { PlayersContext } from "../context/PlayersContext";
-import SchoolPride from '../components/Confetti'
+// import SchoolPride from "../components/Confetti";
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
 
 const styles = {
   container: "h-screen w-screen flex flex-col justify-center items-center",
@@ -19,6 +21,10 @@ const styles = {
   top10: "flex justify-center items-center flex-wrap gap-[1rem]",
 };
 
+const SchoolPride = dynamic(() => import("../components/Confetti"), {
+  suspense: true,
+});
+
 function order() {
   const { players } = useContext(PlayersContext);
 
@@ -30,13 +36,11 @@ function order() {
     .sort((a: any, b: any) => (a.vote > b.vote ? -1 : 1))
     .slice(1, 10);
 
-
-
   return (
     <div className={styles.container}>
-      {/* <SchoolPride>
-
-      </SchoolPride> */}
+      <Suspense fallback={`Loading...`}>
+        <SchoolPride />
+      </Suspense>
       <div className={styles.menuBar}>
         <Link href={"/"}>
           <div className={styles.menuButton}> ⚽️ </div>

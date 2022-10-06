@@ -7,69 +7,62 @@ const canvasStyles = {
   width: "100%",
   height: "100%",
   top: 0,
-  left: 0,
+  left: 0
 };
 
-export default class SchoolPride extends React.Component {
+export default class Realistic extends React.Component {
   constructor(props) {
     super(props);
-    this.isAnimationEnabled = false;
     this.animationInstance = null;
-    this.nextTickAnimation = this.nextTickAnimation.bind(this);
   }
 
-  makeShot = (angle, originX) => {
+  makeShot = (particleRatio, opts) => {
     this.animationInstance &&
       this.animationInstance({
-        particleCount: 3,
-        angle,
-        spread: 80,
-        origin: { x: originX },
-        colors: ["#bb0000", "#ffffff"],
+        ...opts,
+        origin: { y: 0.7 },
+        particleCount: Math.floor(200 * particleRatio)
       });
   };
 
-  nextTickAnimation = () => {
-    this.makeShot(60, 0);
-    this.makeShot(120, 1);
-    if (this.isAnimationEnabled) requestAnimationFrame(this.nextTickAnimation);
-  };
+  fire = () => {
+    this.makeShot(0.25, {
+      spread: 26,
+      startVelocity: 55
+    });
 
-  startAnimation = () => {
-    this.isAnimationEnabled = true;
-    this.nextTickAnimation();
+    this.makeShot(0.2, {
+      spread: 60
+    });
 
-    setTimeout(() => {
-      this.isAnimationEnabled = false;
-    }, 3000);
-  };
+    this.makeShot(0.35, {
+      spread: 100,
+      decay: 0.91,
+      scalar: 0.8
+    });
 
-  pauseAnimation = () => {
-    this.isAnimationEnabled = false;
-  };
+    this.makeShot(0.1, {
+      spread: 120,
+      startVelocity: 25,
+      decay: 0.92,
+      scalar: 1.2
+    });
 
-  stopAnimation = () => {
-    this.isAnimationEnabled = false;
-    this.animationInstance && this.animationInstance.reset();
+    this.makeShot(0.1, {
+      spread: 120,
+      startVelocity: 45
+    });
   };
 
   getInstance = (instance) => {
     this.animationInstance = instance;
   };
 
-  componentWillUnmount() {
-    this.isAnimationEnabled = false;
-  }
-
   render() {
-    this.startAnimation();
+    this.fire()
     return (
       <>
-        {/* <div>
-          <button onClick={this.startAnimation}>Start</button>
-          <button onClick={this.pauseAnimation}>Pause</button>
-          <button onClick={this.stopAnimation}>Stop</button>
-        </div> */}
+        {/* <button onClick={this.fire}>Fire</button> */}
         <ReactCanvasConfetti
           refConfetti={this.getInstance}
           style={canvasStyles}
