@@ -34,9 +34,9 @@ function order() {
 
   return (
     <div className={styles.container}>
-      <SchoolPride>
+      {/* <SchoolPride>
 
-      </SchoolPride>
+      </SchoolPride> */}
       <div className={styles.menuBar}>
         <Link href={"/"}>
           <div className={styles.menuButton}> ⚽️ </div>
