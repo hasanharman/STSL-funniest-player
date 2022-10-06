@@ -1,0 +1,29 @@
+{
+  "players": [
+    {
+      "id": 1,
+      "name": "Dries Mertens",
+      "src": "/assets/players/Mertens.png"
+    },
+    {
+      "id": 2,
+      "name": "Marc Bartra",
+      "src": "/assets/players/Bartra.png"
+    },
+    {
+      "id": 3,
+      "name": "Lucas Torreira",
+      "src": "/assets/players/Torreira.png"
+    },
+    {
+      "id": 4,
+      "name": "Edin Višća",
+      "src": "/assets/players/Višća.png"
+    },
+    {
+      "id": 5,
+      "name": "Bertrand Traoré",
+      "src": "/assets/players/Traoré.png"
+    }
+  ]
+}
