@@ -1,4 +1,4 @@
-const MAX_PLAYER_ID = 30;
+const MAX_PLAYER_ID = 59;
 
 export const getRandomPlayer: (notThisOne?: number) => number = (
   notThisOne
